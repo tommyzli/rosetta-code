@@ -17,13 +17,14 @@
 		"X Yz" "Room 1003" "(234)555-8913" "(234)555-0033" "xyz@rosettacode.org")
 	"/home/xyz" "/bin/bash"))
 
-(defun format_for_write (record)
+(defun format-for-write (record delim)
 	(reduce (lambda (a b)
-		(print b)
 		(typecase b
-			(list "")
-			(integer (concatenate 'string a ":" (write-to-string b)))
-			(t (concatenate 'string a ":" b)))
+			(list (concatenate 'string a (format-for-write b ",")))
+			(t (concatenate 'string a (typecase b
+				(integer (write-to-string b))
+				(t b)
+				) delim)))
 		) record :initial-value ""))
 			
 
@@ -32,7 +33,7 @@
 					:direction :output 
 					:if-exists :supersede
 					:if-does-not-exist :create)
-		(loop for x in *initial_data* do (format_for_write x))
+		(loop for x in *initial_data* do (print (format-for-write x ":")))
 	))
 
 (main)
