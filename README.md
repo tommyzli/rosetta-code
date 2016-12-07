@@ -1,5 +1,7 @@
 filling in some unimplemented tasks for [Rosetta Code](http://rosettacode.org)
 
+Solutions are tested on [SBCL](http://www.sbcl.org/getting.html) and [CLISP](http://www.clisp.org/)
+
 # Complete
 
 ### `append_file.cl`
