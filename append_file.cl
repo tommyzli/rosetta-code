@@ -29,11 +29,19 @@
 			
 
 (defun main ()
-	(with-open-file (stream "./passwd" 
-					:direction :output 
+	;; Write initial values to file
+	(with-open-file (stream "./passwd"
+					:direction :output
 					:if-exists :supersede
 					:if-does-not-exist :create)
-		(loop for x in *initial_data* do (print (format-for-write x ":")))
-	))
+		(loop for x in *initial_data* do
+			(format stream (concatenate 'string (format-for-write x ":") "~%"))))
+
+	;; Reopen file, append insert value
+	(with-open-file (stream "./passwd"
+					:direction :output
+					:if-exists :append)
+		(format stream (concatenate 'string (format-for-write *insert* ":") "~%")))
+	)
 
 (main)
