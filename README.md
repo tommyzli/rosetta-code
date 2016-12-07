@@ -2,6 +2,21 @@ filling in some unimplemented tasks for [Rosetta Code](http://rosettacode.org)
 
 Solutions are tested on [SBCL](http://www.sbcl.org/getting.html) and [CLISP](http://www.clisp.org/)
 
+# To run:
+`CLISP`:
+```
+$ clisp whichever_file.cl
+```
+
+`SBCL`:
+```
+$ sbcl
+```
+Then inside the repl:
+```lisp
+(load "whichever_file.cl")
+```
+
 # Complete
 
 ### `append_file.cl`
