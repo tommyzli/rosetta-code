@@ -17,15 +17,16 @@
 		"X Yz" "Room 1003" "(234)555-8913" "(234)555-0033" "xyz@rosettacode.org")
 	"/home/xyz" "/bin/bash"))
 
-(defun format-for-write (record delim)
+(defun serialize (record delim)
 	(reduce (lambda (a b)
 		(typecase b
-			(list (concatenate 'string a (format-for-write b ",")))
-			(t (concatenate 'string a (typecase b
-				(integer (write-to-string b))
-				(t b)
-				) delim)))
-		) record :initial-value ""))
+			(list (concatenate 'string a (serialize b ",")))
+			(t (concatenate 'string a
+				(typecase b
+					(integer (write-to-string b))
+					(t b))
+				delim))))
+	record :initial-value ""))
 			
 
 (defun main ()
@@ -35,13 +36,17 @@
 					:if-exists :supersede
 					:if-does-not-exist :create)
 		(loop for x in *initial_data* do
-			(format stream (concatenate 'string (format-for-write x ":") "~%"))))
+			(format stream (concatenate 'string (serialize x ":") "~%"))))
 
 	;; Reopen file, append insert value
 	(with-open-file (stream "./passwd"
 					:direction :output
 					:if-exists :append)
-		(format stream (concatenate 'string (format-for-write *insert* ":") "~%")))
+		(format stream (concatenate 'string (serialize *insert* ":") "~%")))
+
+	;; Reopen file, search for new record
+	(with-open-file (stream "./passwd"
+					:direction :input))
 	)
 
 (main)
