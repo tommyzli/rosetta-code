@@ -24,3 +24,6 @@ Then inside the repl:
 
 ### `object.cl`
  - http://rosettacode.org/wiki/Call_an_object_method
+
+### `line_printer.cl`
+ - http://rosettacode.org/wiki/Hello_world/Line_printer
