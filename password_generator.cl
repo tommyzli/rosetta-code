@@ -17,6 +17,14 @@
   (remove-if (lambda (x) (member x *similar-characters*)) s))
 
 
+(defun shuffle-list (input-list)
+  (loop with l = (length input-list)
+     for i below l
+     do (rotatef (nth i input-list)
+         (nth (random l) input-list)))
+  input-list)
+
+
 (defun generate-password (len human-readable)
   (let*
     ((upper (if human-readable (make-readable *uppercase*) *uppercase*))
@@ -28,11 +36,11 @@
       (cons (nth (random (length x)) x) acc))
       character-groups :initial-value NIL)))
 
-    (coerce (reduce (lambda (acc x)
+    (coerce (shuffle-list (reduce (lambda (acc x)
       (declare (ignore x))
       (let ((group (nth (random (length character-groups)) character-groups)))
         (cons (nth (random (length group)) group) acc)))
-      (make-list (- len 4)) :initial-value initial-password) 'string)))
+      (make-list (- len 4)) :initial-value initial-password)) 'string)))
 
 
 (defun main (len count &optional human-readable)
