@@ -27,3 +27,6 @@ Then inside the repl:
 
 ### `line_printer.cl`
  - http://rosettacode.org/wiki/Hello_world/Line_printer
+
+### `password_generator.cl`
+ - http://rosettacode.org/wiki/Password_generator
