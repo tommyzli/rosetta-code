@@ -32,3 +32,4 @@ Then inside the repl:
  - http://rosettacode.org/wiki/Password_generator
 
 ### `four_bit_adder.cl`
+ - https://rosettacode.org/wiki/Four_bit_adder
